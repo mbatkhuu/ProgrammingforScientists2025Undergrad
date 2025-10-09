@@ -15,8 +15,6 @@ class OrderedPair:
         self.x: float = float(x)
         self.y: float = float(y)
 
-    def __repr__(self):
-        return f"OrderedPair({self.x}, {self.y})"
 
 class Body:
     """
@@ -25,15 +23,15 @@ class Body:
 
     def __init__(
         self,
-        name: str = "Unnamed",
-        mass: float = 1.0,
-        radius: float = 1.0,
-        position: OrderedPair = None,
-        velocity: OrderedPair = None,
-        acceleration: OrderedPair = None,
-        red: int = 255,
-        green: int = 255,
-        blue: int = 255,
+        name: str,
+        mass: float,
+        radius: float,
+        position: OrderedPair,
+        velocity: OrderedPair,
+        acceleration: OrderedPair,
+        red: int,
+        green: int,
+        blue: int
     ):
         # Name
         if not isinstance(name, str) or not name.strip():
@@ -67,8 +65,6 @@ class Body:
         self.green = green
         self.blue = blue
 
-    def __repr__(self):
-        return f"Body(name={self.name}, mass={self.mass}, radius={self.radius})"
 
 class Universe:
     """
@@ -77,7 +73,7 @@ class Universe:
 
     gravitational_constant: float = 6.674e-11  # Default; can be overridden
 
-    def __init__(self, bodies: list[Body], width: float = 1000.0):
+    def __init__(self, bodies: list[Body], width: float):
         if not isinstance(bodies, list) or not all(isinstance(b, Body) for b in bodies):
             raise TypeError("bodies must be a list of Body objects.")
         if not isinstance(width, (int, float)) or width <= 0:
@@ -85,6 +81,3 @@ class Universe:
 
         self.bodies = bodies
         self.width = float(width)
-
-    def __repr__(self):
-        return f"Universe(n_bodies={len(self.bodies)}, width={self.width})"
